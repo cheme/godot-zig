@@ -1,29 +1,10 @@
-# godot-zig
-
-A WIP Zig bindings for Godot 4.
-Features are being gradually added to meet the needs of a demo game.
-Bugs and missing features are expected until a stable version finally released.
-Issue report, feature request and pull request are all welcome.
-
-## Prerequisites
-
-1. zig 0.13
-2. godot 4.3
-
-## Usage:
-
-see [Examples](https://github.com/godot-zig/godot-zig-examples) for reference.
-
-## Code Sample:
-
-```
 const std = @import("std");
 const Godot = @import("godot");
 const Vec2 = Godot.Vector2;
 const Self = @This();
-const Base = Godot.Control;
-pub usingnamespace Base;
-base: Base,
+
+pub usingnamespace Godot.Control;
+base: Godot.Control,
 
 sprite: Godot.Sprite2D,
 
@@ -31,13 +12,13 @@ pub fn _enter_tree(self: *Self) void {
     if (Godot.Engine.getSingleton().isEditorHint()) return;
 
     var normal_btn = Godot.initButton();
-    self.add_child(normal_btn, false, Godot.Node.INTERNAL_MODE_DISABLED);
+    self.addChild(normal_btn, false, Godot.Node.INTERNAL_MODE_DISABLED);
     normal_btn.setPosition(Vec2.new(100, 20), false);
     normal_btn.setSize(Vec2.new(100, 50), false);
     normal_btn.setText("Press Me");
 
     var toggle_btn = Godot.initCheckBox();
-    self.add_child(toggle_btn, false, Godot.Node.INTERNAL_MODE_DISABLED);
+    self.addChild(toggle_btn, false, Godot.Node.INTERNAL_MODE_DISABLED);
     toggle_btn.setPosition(Vec2.new(320, 20), false);
     toggle_btn.setSize(Vec2.new(100, 50), false);
     toggle_btn.setText("Toggle Me");
@@ -71,4 +52,3 @@ pub fn on_toggled(self: *Self, toggled_on: bool) void {
     _ = self;
     std.debug.print("on_toggled {any}\n", .{toggled_on});
 }
-```
