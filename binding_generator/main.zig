@@ -1006,7 +1006,9 @@ fn generateGodotCore(allocator: std.mem.Allocator) !void {
         if (std.mem.startsWith(u8, decl.name, "GDExtensionInterface")) {
             const res1 = try std.mem.replaceOwned(u8, allocator, decl.name, "GDExtensionInterface", "");
             defer allocator.free(res1);
-            if (std.mem.eql(u8, res1, "FunctionPtr") or std.mem.eql(u8, res1, "GetProcAddress")) {
+            if (std.mem.eql(u8, res1, "FunctionPtr")
+                or std.mem.eql(u8, res1, "GetProcAddress")
+                or std.mem.eql(u8, res1, "GetVariantGetInternalPtrFunc")) {
                 continue;
             }
 
